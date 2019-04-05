@@ -4514,6 +4514,15 @@ pegjs@^0.10.0:
   resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
   integrity sha1-z4uvrm7d/0tafvsYUmnqr0YQ3b0=
 
+permission_aware_react_native_component@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/permission_aware_react_native_component/-/permission_aware_react_native_component-1.0.0.tgz#bcbf583c39263b07bca51972d7a7f8e5b1654a13"
+  integrity sha512-P21gIopPG9lX4Kmnoje/Hl+ZgxR01b0RGxcL47qIVgjeq2L3Tz9697MAGIIlWyZUH1iQFvsmZQBWHwEHHkpc1w==
+  dependencies:
+    expo "^32.0.0"
+    react "16.5.0"
+    react-native "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -4709,7 +4718,7 @@ react-native-gesture-handler@~1.0.14:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-"react-native-maps@github:expo/react-native-maps#v0.22.1-exp.0":
+react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
