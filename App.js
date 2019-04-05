@@ -9,7 +9,7 @@ const componentList = [
   ({permission:Permissions.AUDIO_RECORDING,component:(<Text>Tengo permisos de grabacion de audio</Text>)}),
   ({permission:Permissions.CONTACTS,component:(<Text>Tengo permiso de acceder a contactos</Text>)}),
 ]
-//Something
+
 export default class App extends React.Component {
   render() {
     return (
