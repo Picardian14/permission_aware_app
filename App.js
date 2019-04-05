@@ -1,11 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PermissionAwareComponent from 'permission_aware_react_native_component'
+
+import { Permissions } from 'expo'
+
+const componentList = [
+  ({permission:Permissions.CAMERA,component:(<Text>Tengo permisos de camara</Text>)}),
+  ({permission:Permissions.AUDIO_RECORDING,component:(<Text>Tengo permisos de grabacion de audio</Text>)}),
+  ({permission:Permissions.CONTACTS,component:(<Text>Tengo permiso de acceder a contactos</Text>)}),
+]
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <PermissionAwareComponent permissionComponentList={componentList} defaultComponent={(<Text>Componente default</Text>)} />
       </View>
     );
   }
