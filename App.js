@@ -3,9 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import PermissionAwareComponent from 'permission_aware_react_native_component'
 
 import { Permissions } from 'expo'
+import MapComponent from './MapComponent'
 
 const componentList = [
-  ({permission:Permissions.CAMERA,component:(<Text>Tengo permisos de camara</Text>)}),
+  ({permission:Permissions.LOCATION,component:(<MapComponent/>)}),
   ({permission:Permissions.AUDIO_RECORDING,component:(<Text>Tengo permisos de grabacion de audio</Text>)}),
   ({permission:Permissions.CONTACTS,component:(<Text>Tengo permiso de acceder a contactos</Text>)}),
 ]
