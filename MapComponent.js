@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
-import { Button, View, StyleSheet } from 'react-native';
-import { Constants, MapView, Location } from 'expo';
+import React, { Component } from 'react'
+import { View, StyleSheet, Text } from 'react-native'
+import { Constants, MapView, Permissions } from 'expo'
+import PermissionAwareComponent from 'permission_aware_react_native_component'
+
+import GPSLocComponent from './GPSLocComponent'
 
 export default class MapComponent extends Component {
+  
   state = {
     mapRegion: { latitude: -34.00000, longitude: -64.00000, latitudeDelta: 0.5, longitudeDelta: 0.5 },
     location: null,
   };
-
-  componentDidMount = ()=>this._getLocationAsync().then(this._setLocation.bind(this))
-
-  _handleMapRegionChange = mapRegion => {
-    this.setState({ mapRegion });
-  };
-
-  _getLocationAsync = async () => await Location.getCurrentPositionAsync({})
-
+  
   _setLocation = location => this.setState({mapRegion:({...this.state.mapRegion,...location.coords}), location})
-
+  
   render() {
+
+    componentList = [
+      ({permission:Permissions.LOCATION,component:(<GPSLocComponent _setLocation={this._setLocation.bind(this)}/>)}),
+    ]
+
     return (
       <View style={styles.container}>
         <MapView
@@ -36,7 +37,7 @@ export default class MapComponent extends Component {
           ) : null
         }
         </MapView>
-        <Button title="A casa" onPress={()=>this._getLocationAsync().then(this._setLocation.bind(this))}/>
+        <PermissionAwareComponent  permissionComponentList={componentList} defaultComponent={(<Text>No se dispone de permisos de ubicacion</Text>)} />
       </View>
     );
   }
