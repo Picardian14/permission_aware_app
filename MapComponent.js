@@ -4,6 +4,7 @@ import { Constants, MapView, Permissions } from 'expo'
 import PermissionAwareComponent from 'permission_aware_react_native_component'
 
 import GPSLocComponent from './GPSLocComponent'
+import ManualLocComponent from './ManualLocComponent'
 
 export default class MapComponent extends Component {
   
@@ -12,20 +13,27 @@ export default class MapComponent extends Component {
     location: null,
   };
   
-  _setLocation = location => this.setState({mapRegion:({...this.state.mapRegion,...location.coords}), location})
-  
+  _setLocation = location => this.setState(
+    {
+      mapRegion:({...this.state.mapRegion,...location.coords}),
+      location
+    })
+  _handleMapRegionChange = coords => this.setState({mapRegion:coords})
+
+  getMapRegion = () => this.state.mapRegion
+
   render() {
 
     componentList = [
-      ({permission:Permissions.LOCATION,component:(<GPSLocComponent _setLocation={this._setLocation.bind(this)}/>)}),
+      ({permission:Permissions.LOCATION,component:(<GPSLocComponent _setLocation={this._setLocation.bind(this)}/>)}),      
     ]
 
     return (
       <View style={styles.container}>
         <MapView
           style={{ alignSelf: 'stretch', height: 200 }}
-          region={{...this.state.mapRegion}}
-          onRegionChange={this._handleMapRegionChange}
+          initialRegion={{...this.state.mapRegion}}
+          onRegionChangeComplete={this._handleMapRegionChange}
         >
         {
           this.state.location ? (
@@ -37,7 +45,7 @@ export default class MapComponent extends Component {
           ) : null
         }
         </MapView>
-        <PermissionAwareComponent  permissionComponentList={componentList} defaultComponent={(<Text>No se dispone de permisos de ubicacion</Text>)} />
+        <PermissionAwareComponent  permissionComponentList={componentList} defaultComponent={(<ManualLocComponent _setLocation={this._setLocation.bind(this)} currentCoord={this.getMapRegion}/>)} />
       </View>
     );
   }
