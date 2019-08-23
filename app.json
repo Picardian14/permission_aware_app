@@ -25,5 +25,10 @@
     "ios": {
       "supportsTablet": true
     }
+  },
+  "links": {
+    "packages": [
+      "@react-native-community/netinfo"
+    ]
   }
 }

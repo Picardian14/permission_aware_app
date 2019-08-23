@@ -3,6 +3,8 @@ import { Button } from 'react-native'
 
 export default class GPSLocComponent extends Component {
 
+  componentDidMount = () => this.props.toggleMap(true)
+
   _getLocation = (coords) => ({coords})
 
   render() {

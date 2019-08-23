@@ -4,7 +4,10 @@ import { Location } from 'expo'
 
 export default class GPSLocComponent extends Component {
 
-  componentDidMount = () => this._getLocationAsync().then(this.props._setLocation)
+  componentDidMount = () => {
+    this.props.toggleMap(true)
+    this._getLocationAsync().then(this.props._setLocation)
+  }
 
   _getLocationAsync = async () => await Location.getCurrentPositionAsync({})
 
