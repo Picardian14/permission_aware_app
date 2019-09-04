@@ -16,8 +16,6 @@ class GalleryComponent extends React.Component {
   }
 
   render() {
-    let { image } = this.state;
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -28,3 +26,5 @@ class GalleryComponent extends React.Component {
     );
   }
 }
+
+export default GalleryComponent

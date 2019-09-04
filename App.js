@@ -1,17 +1,18 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
 import {
   PermissionAware as PermissionAwareComponent,
   PermissionConstants,
 } from 'permission_aware_react_native_component'
 import CameraComponent from './Components/Camera'
-import GalleryComponent from './Components/Galery'
+import GalleryComponent from './Components/Gallery'
 import PickerComponent from './Components/Default'
 
 export default class App extends React.Component {
 
   constructor() {
+    super()
     this.state = {
       imageSrc: null,
     }
@@ -23,18 +24,22 @@ export default class App extends React.Component {
     const {
       imageSrc,
     } = this.state
+    console.log(imageSrc)
 
     return (
       <View style={styles.container}>
         <PermissionAwareComponent
           permissionComponentList={[
-            (PermissionConstants.CAMERA,<CameraComponent setSource={this.setSource} />),
-            (PermissionConstants.CAMERA_ROLL,<GalleryComponent setSource={this.setSource} />),
+            ({
+              permission:PermissionConstants.CAMERA_ROLL,
+              component:(<GalleryComponent setSource={this.setSource} />)
+            }),
+            //(PermissionConstants.CAMERA,<CameraComponent setSource={this.setSource} />),
           ]}
-          defaultComponent={PickerComponent}
+          defaultComponent={<Text>A</Text>}
         />
         {
-          (imageSrc !== null) ? <Image src={imageSrc} /> : null
+          (imageSrc !== null) ? (<Image source={imageSrc} />) : null
         }
       </View>
     );
