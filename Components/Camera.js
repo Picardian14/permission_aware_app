@@ -57,7 +57,7 @@ class CameraComponent extends React.Component {
               onPress={ () => {
                  this.snap()
               }}>
-              <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Tomar foto </Text>
+              <Text style={{ fontSize: 15, marginBottom: 5, color: 'white', alignSelf:'center' }}> Tomar foto </Text>
             </TouchableOpacity>
           </View>
         </Camera>
