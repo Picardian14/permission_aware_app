@@ -26,22 +26,17 @@ class CameraComponent extends React.Component {
   render() {
     if(!this.state.pictureTaken) {
       return (
-        <View style={{ flex: 1, width:'100%', height:'50%' }}>
-          <Camera style={{ flex: 1, width:'100%', height:'50%' }} type={this.state.type} ref={ref => {
+        <View style={{ flex: 1, width:'100%', height:'100%' }}>
+          <Camera style={{ flex: 1, width:'90%', height:'90%' }} type={this.state.type} ref={ref => {
           this.camera = ref; } }>
             <View
               style={{
                 flex: 1,
                 backgroundColor: 'transparent',
                 flexDirection: 'row',
-                alignItems: "center",
+                justifyContent:'space-between',
               }}>
               <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
                 onPress={() => {
                   this.setState({
                     type:
@@ -50,18 +45,13 @@ class CameraComponent extends React.Component {
                         : Camera.Constants.Type.back,
                   });
                 }}>
-                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+                <Text style={{ fontSize: 18, marginBottom: 50, color: 'white' }}> Flip </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
                 onPress={ () => {
                   this.snap()
                 }}>
-                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Tomar foto </Text>
+                <Text style={{ fontSize: 12, marginBottom: 50, color: 'white' }}> Tomar foto </Text>
               </TouchableOpacity>
             </View>
           </Camera>
