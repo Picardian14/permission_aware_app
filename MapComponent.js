@@ -4,7 +4,7 @@ import { Constants, MapView } from 'expo'
 import {
   PermissionAware as PermissionAwareComponent,
   PermissionConstants,
- } from './PermissionAwareComponent'
+ } from 'permission_aware_react_native_component'
 
 import GPSLocComponent from './GPSLocComponent'
 import ManualLocComponent from './ManualLocComponent'
