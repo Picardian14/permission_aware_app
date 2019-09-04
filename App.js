@@ -8,6 +8,7 @@ import {
 import CameraComponent from './Components/Camera'
 import GalleryComponent from './Components/Gallery'
 import PickerComponent from './Components/Default'
+import Default from './Components/Default';
 
 export default class App extends React.Component {
 
@@ -24,7 +25,6 @@ export default class App extends React.Component {
     const {
       imageSrc,
     } = this.state
-    console.log(imageSrc)
 
     return (
       <View style={styles.container}>
@@ -36,10 +36,10 @@ export default class App extends React.Component {
             }),
             //(PermissionConstants.CAMERA,<CameraComponent setSource={this.setSource} />),
           ]}
-          defaultComponent={<Text>A</Text>}
+          defaultComponent={(<Default setSource={this.setSource} />)}
         />
         {
-          (imageSrc !== null) ? (<Image style={styles.image} source={{uri:imageSrc}} />) : null
+          (imageSrc !== null) ? (<Image style={styles.image} source={imageSrc} />) : null
         }
       </View>
     );

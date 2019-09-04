@@ -11,7 +11,7 @@ class GalleryComponent extends React.Component {
       aspect: [4, 3],
     });
     if (!result.cancelled) {
-      this.props.setSource(result.uri);
+      this.props.setSource({uri:result.uri});
     }
   }
 
