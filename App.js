@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 
 import {
   PermissionAware as PermissionAwareComponent,
@@ -7,8 +7,7 @@ import {
 } from 'permission_aware_react_native_component'
 import CameraComponent from './Components/Camera'
 import GalleryComponent from './Components/Gallery'
-import PickerComponent from './Components/Default'
-import Default from './Components/Default';
+import Default from './Components/Default'
 
 export default class App extends React.Component {
 
@@ -34,7 +33,10 @@ export default class App extends React.Component {
               permission:PermissionConstants.CAMERA_ROLL,
               component:(<GalleryComponent setSource={this.setSource} />)
             }),
-            //(PermissionConstants.CAMERA,<CameraComponent setSource={this.setSource} />),
+            ({
+              permission:PermissionConstants.CAMERA,
+              component:(<CameraComponent setSource={this.setSource} />)
+            }),
           ]}
           defaultComponent={(<Default setSource={this.setSource} />)}
         />

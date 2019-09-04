@@ -1,44 +1,69 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
+import { Text, View, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { Camera } from 'expo-camera'
+import { ImagePicker} from 'expo'
 
-export default class Camera extends React.Component {
+
+class CameraComponent extends React.Component {
+
+  constructor() {
+    super()
+    this.state = {
+      type:Camera.Constants.Type.front
+    }
+  }
+
   snap = async () => {
-    if (this.camera) {
+    if(this.camera) {
       let photo = await this.camera.takePictureAsync()
-      this.props.setSource(photo.uri)
+      console.log({uri:photo.uri})
+      this.props.setSource({uri:photo.uri})
     }
   }
 
   render() {
-      return (
-        <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
-            <View
+    return (
+      <View style={{ flex: 1, width:'100%', height:'50%' }}>
+        <Camera style={{ flex: 1, width:'100%', height:'50%' }} type={this.state.type} ref={ref => {
+        this.camera = ref; } }>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+              flexDirection: 'row',
+            }}>
+            <TouchableOpacity
               style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
+                flex: 0.1,
+                alignSelf: 'flex-end',
+                alignItems: 'center',
+              }}
+              onPress={() => {
+                this.setState({
+                  type:
+                    this.state.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back,
+                });
               }}>
-              <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type:
-                      this.state.type === Camera.Constants.Type.back
-                        ? Camera.Constants.Type.front
-                        : Camera.Constants.Type.back,
-                  });
-                }}>
-                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-              </TouchableOpacity>
-            </View>
-          </Camera>
-        </View>
-      )
-    }
+              <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                flex: 0.1,
+                alignSelf: 'flex-end',
+                alignItems: 'center',
+              }}
+              onPress={ () => {
+                 this.snap()
+              }}>
+              <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Tomar foto </Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      </View>
+    )
   }
+}
+
+  export default CameraComponent
