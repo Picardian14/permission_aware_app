@@ -1,14 +1,20 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import MapComponent from './MapComponent'
+import {
+  PermissionAware as PermissionAwareComponent,
+  PermissionConstants,
+ } from 'permission_aware_react_native_component'
 
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <MapComponent/>
+        <PermissionAwareComponent
+          permissionComponentList={[]}
+          defaultComponent={(<Text>Default</Text>)}
+        />
       </View>
     );
   }
