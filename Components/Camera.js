@@ -9,7 +9,8 @@ class CameraComponent extends React.Component {
   constructor() {
     super()
     this.state = {
-      type:Camera.Constants.Type.front
+      type:Camera.Constants.Type.front,
+      pictureTaken : false,
     }
   }
 
@@ -18,51 +19,56 @@ class CameraComponent extends React.Component {
       let photo = await this.camera.takePictureAsync()
       console.log({uri:photo.uri})
       this.props.setSource({uri:photo.uri})
+      this.setState({pictureTaken: true})
     }
   }
 
   render() {
-    return (
-      <View style={{ flex: 1, width:'100%', height:'50%' }}>
-        <Camera style={{ flex: 1, width:'100%', height:'50%' }} type={this.state.type} ref={ref => {
-        this.camera = ref; } }>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-            }}>
-            <TouchableOpacity
+    if(!this.state.pictureTaken) {
+      return (
+        <View style={{ flex: 1, width:'100%', height:'50%' }}>
+          <Camera style={{ flex: 1, width:'100%', height:'50%' }} type={this.state.type} ref={ref => {
+          this.camera = ref; } }>
+            <View
               style={{
-                flex: 0.1,
-                alignSelf: 'flex-end',
-                alignItems: 'center',
-              }}
-              onPress={() => {
-                this.setState({
-                  type:
-                    this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                });
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+                alignItems: "center",
               }}>
-              <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                flex: 0.1,
-                alignSelf: 'flex-end',
-                alignItems: 'center',
-              }}
-              onPress={ () => {
-                 this.snap()
-              }}>
-              <Text style={{ fontSize: 15, marginBottom: 5, color: 'white', alignSelf:'center' }}> Tomar foto </Text>
-            </TouchableOpacity>
-          </View>
-        </Camera>
-      </View>
-    )
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  this.setState({
+                    type:
+                      this.state.type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back,
+                  });
+                }}>
+                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={ () => {
+                  this.snap()
+                }}>
+                <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Tomar foto </Text>
+              </TouchableOpacity>
+            </View>
+          </Camera>
+        </View>
+      )
+      } 
+      return null;
   }
 }
 
